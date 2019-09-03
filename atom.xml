@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://3601blog.cn/"/>
-  <updated>2019-09-03T07:23:06.068Z</updated>
+  <updated>2019-09-02T03:17:47.920Z</updated>
   <id>https://3601blog.cn/</id>
   
   <author>
@@ -15,34 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>矩阵的压缩存储</title>
-    <link href="https://3601blog.cn/posts/2f6a46ed/"/>
-    <id>https://3601blog.cn/posts/2f6a46ed/</id>
-    <published>2019-09-03T02:26:10.000Z</published>
-    <updated>2019-09-03T07:23:06.068Z</updated>
-    
-    <content type="html"><![CDATA[<p>矩阵是很多科学工程计算问题中研究的数学对象。在此，我们感兴趣的不是矩阵本身，而是如何存储矩阵的元，从而使矩阵的各种运算能有效地进行。通常，用高级语言编程时，都是用二维数组来储存矩阵元。有的程序设计语言还提供了各种矩阵运算，用户使用时都很方便。<a id="more"></a>然而，在数值分析中经常出现一些阶数很高的矩阵，同时在矩阵中有许多值相同的元素或者是零元素。又是为了节省存储空间，可以对这类矩阵进行压缩存储。所谓压缩存储就是为多个值相同的元只分配一个存储空间，对零元不分配空间。</p><h3 id="特殊矩阵"><a href="#特殊矩阵" class="headerlink" title="特殊矩阵"></a>特殊矩阵</h3><p>若值相同的元素或者零元素在矩阵中的分布有一定规律，则我们称这类矩阵为<strong>特殊矩阵</strong>，否则为<strong>特殊矩阵</strong>。<br>若 $n$ 阶矩阵 $A$ 满足以下性质<br>$$a_{ij}=a_{ji}(1\leq i,j\leq n)$$<br>则称为 $n$ 阶对称矩阵。</p><p>对于对称矩阵，我们可以为每一个对称元分配一个存储空间，则可以将 $n^2$ 个元压缩存储到 $\frac{n(n+1)}{2}$ 个元的空间中。可以行序为主序存储其下三角（包括对角线）中的元。</p><p>假设以一维数组 $sa[\frac{n(n+1)}{2}]$ 作为 $n$阶对称矩阵 $A$ 的存储结构，则  $sa[k]$ 和矩阵之间存在一一对应的关系：</p><p>$$\begin{aligned}<br>k =<br>\begin{cases}<br>\frac {i(i-1)}{2}+j-1 &amp;{i\geq j} \\<br>\frac{j(j-1)}{2}+i-1 &amp;{i &lt; j}<br>\end{cases}<br>\end{aligned}<br>$$</p><p>对于所有的 $k=0,1,2,…,\frac{n(n+1)}{2}-1$，都能确定 $sa[k]$ 中的元在矩阵中的位置 $(i,j)$。由此称 $sa[\frac{n(n+1)}{2}]$ 为 $n$ 阶对称阵 $A$ 的压缩存储。</p><p>这种压缩存储的方法同样也适用于三角矩阵。所谓上（下）三角矩阵是指矩阵的上（下）三角（不包括对角线）中的元均为常数或零的矩阵。则除了和对角矩阵一样只存储其上（下）三角中的元之外，再加一个存储常数的存储空间即可。</p><h3 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h3><p>什么是稀疏矩阵？人们无法给出确切的定义，他只是一个仅凭人们直觉来了解的概念。假设在 $m\times n$ 的矩阵中，有 $t$ 个元素不为零。令 $\delta = \frac{t}{m\times n}$，则称 $\delta$ 为矩阵的稀疏因子。通常认为 $\delta \leq 0.05$ 时称为稀疏矩阵。</p><p>如何进行稀疏矩阵的压缩存储呢？<br>按照压缩存储的概念，只存储稀疏矩阵的非零元。因此，除了存储非零元的值之外，还必须同时记下它所在行和列的位置 $(i,j)$。反之，三个元组 $(i,j,a_ij)$ 唯一确定了一个矩阵的非零元。可以用三元组对其行列数唯一确定。<br>下列三元表<br>((1,2,12),(1,3,9),(3,1,-3),(3,6,14),(4,3,24),(5,2,18),(6,1,15),(6,4,7))<br>加上(6,7)这一对行、列值便可作为下面矩阵 $M$ 的另一种描述。</p><p>$$<br>M =<br>\left[<br>\begin{matrix}<br>  0 &amp; 12 &amp; 9 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\<br>  0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\<br>  -3 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 14 &amp; 0 \\<br>  0 &amp; 0 &amp; 24 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\<br>  0 &amp; 18 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\<br>  15 &amp; 0 &amp; 0 &amp; -7 &amp; 0 &amp; 0 &amp; 0<br>\end{matrix}<br>\right] \tag{3}<br>$$</p><ol><li>三元顺序表</li></ol><p>假设以顺序存储结构来表示三元组表，则可以的稀疏矩阵的一种压缩存储方式，我们称之为三元组顺序表。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> i, j;       <span class="comment">// 该非零元行下标和列下标</span></span><br><span class="line">    ElemType e;</span><br><span class="line">&#125;Triple;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Triple data[MAXSIZE + <span class="number">1</span>];   <span class="comment">// 非零元三元组表，data[0]未用</span></span><br><span class="line">    <span class="keyword">int</span> mu,nu,tu;               <span class="comment">// 矩阵行数，列数和非零元个数</span></span><br><span class="line">&#125;TSMatrix;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;矩阵是很多科学工程计算问题中研究的数学对象。在此，我们感兴趣的不是矩阵本身，而是如何存储矩阵的元，从而使矩阵的各种运算能有效地进行。通常，用高级语言编程时，都是用二维数组来储存矩阵元。有的程序设计语言还提供了各种矩阵运算，用户使用时都很方便。
-    
-    </summary>
-    
-      <category term="C语言" scheme="https://3601blog.cn/categories/C%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="C语言" scheme="https://3601blog.cn/tags/C%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="矩阵" scheme="https://3601blog.cn/tags/%E7%9F%A9%E9%98%B5/"/>
-    
-      <category term="特殊矩阵" scheme="https://3601blog.cn/tags/%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5/"/>
-    
-      <category term="稀疏矩阵" scheme="https://3601blog.cn/tags/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5/"/>
-    
-  </entry>
   
   <entry>
     <title>Hello World</title>
