@@ -1506,7 +1506,7 @@ article:last-child .post-eof {
 .posts-expand .post-meta {
   color: #999;
   font-family: 'Roboto Mono', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  margin: 3px 0 60px 0;
+  margin: 3px 0 30px 0;
   text-align: center;
 }
 .posts-expand .post-meta .post-description {
@@ -1806,7 +1806,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #9a6a2d;
+  background: #58f7d5;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
