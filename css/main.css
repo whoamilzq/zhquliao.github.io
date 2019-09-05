@@ -154,7 +154,7 @@ body {
   background: #eee;
   color: #555;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 0.85em;
+  font-size: 0.9em;
   line-height: 2;
 }
 @media (max-width: 991px) {
@@ -1806,7 +1806,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c874b9;
+  background: #87e8b3;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
