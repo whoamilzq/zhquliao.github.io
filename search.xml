@@ -4,7 +4,32 @@
   
     
     <entry>
-      <title>IA-32架构的基本执行环境</title>
+      <title>2.现代处理器的结构和特点</title>
+      <link href="/posts/75d3effb/"/>
+      <url>/posts/75d3effb/</url>
+      
+        <content type="html"><![CDATA[<h2 id="流水线"><a href="#流水线" class="headerlink" title="流水线"></a>流水线</h2><p>处理器的每一次更新换代，都会增加若干新特性，这是很自然的。同时我们也会发现，老软件在新的处理器上跑得更快。这里面的原因很简单，处理器的设计者总是在想尽办法加快指令的执行。</p><a id="more"></a><p>早在 8086 时代，处理器就已经有了指令预取队列。当指令执行时，如果总线是空闲的（没有访问内存的操作），就可以在指令执行的同时预取指令并提前译码，这种做法是有效的，能大大加快程序的执行速度。</p><p>处理器可以做很多事情，换言之，能够执行各种不同的指令，完成不同的功能，但这些事情大都不会在一个时钟周期内完成。执行一条指令需要从内存中取指令、译码、访问操作数和结果，并进行移位、加法、减法、乘法以及其他任何需要的操作。</p><p>为了提高处理器的执行效率和速度，可以把一条指令的执行过程分解成若干个细小的步骤，并分配给相应的单元来完成。各个单元的执行是独立的、并行的。如此一来，各个步骤的执行在时间上就会重叠起来，这种执行指令的方法就是流水线（Pipe-Line）技术。比如，一条指令的执行过程分为取指令、译码和执行三个步骤，而且假定每个步骤都要花1 个时钟周期，那么，如图所示，如果采用顺序执行，则执行三条指令就要花 9 个时钟周期，每 3 个时钟周期才能得到一条指令的执行结果；如果采用 3 级流水线，则执行这三条指令只需 5 个时钟周期，每隔一个时钟周期就能得到一条指令的执行结果。</p><p><img src="https://ae01.alicdn.com/kf/Hd7694607cbd44349a01b3f3724070486c.jpg" alt="流水线的基本原理"></p><p>一个简单的流水线其实不过如此，但是，它仍有很大的改进空间。原因很简单，指令的执行过程仍然可以继续细分。一般来说，流水线的效率受执行时间最长的那一级的限制，要缩短各级的执行时间，就必须让每一级的任务减少，与此同时，就需要把一些复杂的任务再进行分解。比如，2000年之后推出的 Pentium 4 处理器采用了 NetBurst 微结构，它进一步分解指令的执行过程，采用了 31级超深流水线。</p><h2 id="高速缓存"><a href="#高速缓存" class="headerlink" title="高速缓存"></a>高速缓存</h2><p>影响处理器速度的另一个因素是存储器。从处理器内部向外看，它们分别是寄存器、内存和硬盘。当然，现在有的计算机已经用上了固态磁盘。</p><p>寄存器的速度是最快的，原因在于它使用了触发器，这是一种利用反馈原理制作的存储电路，在《穿越计算机的迷雾》那本书里，介绍得很清楚。触发器的工作速度是纳秒（ns）级别的，当然也可以用来做为内存的基本单元，即静态存储器（SRAM），缺点是成本太高，价格也不菲。所以，制作内存芯片的材料一般是电容和单个的晶体管，由于电容需要定时刷新，使得它的访问速度变得很慢，通常是几十个纳秒。因此，它也获得了一个恰当的名字：动态存储器（DRAM），我们所用的内存芯片，大部分都是 DRAM。最后，硬盘是机电设备，是机械和电子的混合体，它的速度最慢，通常在毫秒级（ms）。</p><p>在这种情况下，因为需要等待内存和硬盘这样的慢速设备，处理器便无法全速运行。为了缓解这一矛盾，高速缓存（Cache）技术应运而生。高速缓存是处理器与内存（DRAM）之间的一个静态存储器，容量较小，但速度可以与处理器匹配。高速缓存的用处源于程序在运行时所具有的局部性规律。首先，程序常常访问最近刚刚访问过的指令和数据，或者与它们相邻的指令和数据。比如，程序往往是序列化地从内存中取指令执行的，循环操作往往是执行一段固定的指令。当访问数据时，要访问的数据通常都被安排在一起；其次，一旦访问了某个数据，那么，不久之后，它可能会被再次访问。</p><p>利用程序运行时的局部性原理，可以把处理器正在访问和即将访问的指令和数据块从内存调入高速缓存中。于是，每当处理器要访问内存时，首先检索高速缓存。如果要访问的内容已经在高速缓存中，那么，很好，可以用极快的速度直接从高速缓存中取得，这称为命中（Hit）；否则，称为不中（Miss）。在不中的情况下，处理器在取得需要的内容之前必须重新装载高速缓存，而不只是直接到内存中去取那个内容。高速缓存的装载是以块为单位的，包括那个所需数据的邻近内容。为此，需要额外的时间来等待块从内存载入高速缓存，在该过程中所损失的时间称为不中惩罚（Miss Penalty）。</p><p>高速缓存的复杂性在于，每一款处理器可能都有不同的实现。在一些复杂的处理器内部，会存在多级 Cache，分别应用于各个独立的执行部件。</p><h2 id="乱序执行"><a href="#乱序执行" class="headerlink" title="乱序执行"></a>乱序执行</h2><p>为了实现流水线技术，需要将指令拆分成更小的可独立执行部分，即拆 分成微操作（Micro-Operations），简写为μ ops。</p><p>有些指令非常简单，因此只需要一个微操作。如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add eax,ebx</span><br></pre></td></tr></table></figure><p>再比如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add eax,[mem]</span><br></pre></td></tr></table></figure><p>可以拆分成两个微操作，一个用于从内存中读取数据并保存到临时寄存器，另一个用于将EAX寄存器和临时寄存器中的数值相加。</p><p>再举个例子，这条指令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add [mem],eax</span><br></pre></td></tr></table></figure><p>可以拆分成三个微操作，一个从内存中读数据，一个执行相加的动作，第3个用于将相加的结果写回到内存中。</p><p>一旦将指令拆分成微操作，处理器就可以在必要的时候乱序执行（Out-Of-Order Execution）程序。考虑以下例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov eax,[mem1]</span><br><span class="line">shl eax,5</span><br><span class="line">add eax,[mem2]</span><br><span class="line">mov [mem3],eax</span><br></pre></td></tr></table></figure><p>这里，指令add eax,[mem2]可以拆分为两个微操作。如此一来，在执行逻辑左移指令的同时，处理器可以提前从内存中读取mem2的内容。典型地，如果数据不在高速缓存中（不中），那么处理器在获取mem1的内容之后，会立即开始获取mem2的内容，与此同时，shl指令的执行早就开始了。</p><p>将指令拆分成微操作，也可以使得堆栈的操作更有效率。考虑以下代码片断：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push eax</span><br><span class="line">call func</span><br></pre></td></tr></table></figure><p>这里，push eax指令可以拆分成两个微操作，即可以表述为以下的等价形式：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sub esp,4</span><br><span class="line">mov [esp],eax</span><br></pre></td></tr></table></figure><p>这就带来了一个好处，即使EAX寄存器的内容还没有准备好，微操作sub esp,4也可以执行。call指令执行时需要在当前堆栈中保存返回地址，在以前，该操作只能等待push eax指令执行结束，因为它需要ESP的新值。感谢微操作，现在，call指令在微操作sub esp,4执行结束时就可以无延迟地立即开始执行。</p><h2 id="寄存器重命名"><a href="#寄存器重命名" class="headerlink" title="寄存器重命名"></a>寄存器重命名</h2><p>考虑以下例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mov eax,[mem1]</span><br><span class="line">shl eax,3</span><br><span class="line">mov [mem2],eax</span><br><span class="line">mov eax,[mem3]</span><br><span class="line">add eax,2</span><br><span class="line">mov [mem4],eax</span><br></pre></td></tr></table></figure><p>以上代码片断做了两件事，但互不相干：将mem1里的内容左移3次（乘以8），并将mem3里的内容加2。如果我们为最后三条指令使用不同的寄存器，那么将更明显地看出这两件事的无关性。并且，事实上，处理器实际上也是这样做的。处理器为最后三条指令使用了另一个不同的临时寄存器，因此，左移（乘法）和加法可以并行地处理。</p><p>IA-32架构的处理器只有8个32位通用寄存器，但通常都会被我们全部派上用场（甚至还觉得不够）。因此，我们不能奢望在每个计算当中都使用新的寄存器。不过，在处理器内部，却有大量的临时寄存器可用，处理器可以重命名这些寄存器以代表一个逻辑寄存器，比如EAX。</p><p>寄存器重命名以一种完全自动和非常简单的方式工作。每当指令写逻辑寄存器时，处理器就为那个逻辑寄存器分配一个新的临时寄存器。再来看一个例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mov eax,[mem1]</span><br><span class="line">mov ebx,[mem2]</span><br><span class="line">add ebx,eax</span><br><span class="line">shl eax,3</span><br><span class="line">mov [mem3],eax</span><br><span class="line">mov [mem4],ebx</span><br></pre></td></tr></table></figure><p>假定现在mem1的内容在高速缓存里，可以立即取得，但mem2的内容不在高速缓存中。这意味着，左移操作可以在加法之前开始（使用临时寄存器代替EAX）。为左移的结果使用一个新的临时寄存器，其好处是EAX寄存器中仍然是以前的内容，它将一直保持这个值，直到EBX寄存器中的内容就绪，然后同它一起做加法运算。如果没有寄存器重命名机制，左移操作将不得不等待从内存中读取mem2的内容到EBX寄存器以及加法操作完成。</p><p>在所有的操作都完成之后，那个代表EAX寄存器最终结果的临时寄存器的内容被写入真实的EAX寄存器，该处理过程称为引退（Retirement）。</p><p>所有通用寄存器，堆栈指针、标志、浮点寄存器，甚至段寄存器都有可能被重命名。</p><h2 id="分支目标预测"><a href="#分支目标预测" class="headerlink" title="分支目标预测"></a>分支目标预测</h2><p>流水线并不是百分之百完美的解决方案。实际上，有很多潜在的因素会使得流水线不能达到最佳的效率。一个典型的情况是，如果遇到一条转移指令，则后面那些已经进入流水线的指令就都无效了。换句话说，我们必须清空（Flush）流水线，从要转移到的目标位置处重新取指令放入流水线。</p><p>在现代处理器中，流水线操作分为很多步骤，包括取指令、译码、寄存器分配和重命名、微操作排序、执行和引退。指令的流水线处理方式允许处理器同时做很多事情。在一条指令执行时，下一条指令正在获取和译码。</p><p>流水线的最大问题是代码中经常存在分支。举个例子来说，一个条件转移允许指令流前往任意两个方向。如果这里只有一个流水线，那么，直到那个分支开始执行，在此之前，处理器将不知道应该用哪个分支填充流水线。流水线越长，处理器在用错误的分支填充流水线时，浪费的时间越多。</p><p>随着复杂架构下的流水线变得越来越长，程序分支带来的问题开始变得很大。让处理器的设计者不能接受，毕竟不中处罚的代价越来越高。<br>为了解决这个问题，在1996年的Pentium Pro处理器上，引入了分支预测技术（Branch Prediction）。分支预测的核心问题是，转移是发生还是不会发生。换句话说，条件转移指令的条件会不会成立。举个例子来说：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jne branch5</span><br></pre></td></tr></table></figure><p>在这条指令还没有执行的时候，处理器就必须提前预测相等的条件在这条指令执行的时候是否成立。这当然是很困难的，几乎不可能。想想看，如果能够提前知道结果，还执行这些指令干嘛。</p><p>但是，从统计学的角度来看，有些事情一旦出现，下一次还会出现的概率较大。一个典型的例子就是循环，比如下面的程序片断：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xor si,si</span><br><span class="line">lops:</span><br><span class="line">    …</span><br><span class="line">    cmp si,20</span><br><span class="line">    jnz lops</span><br></pre></td></tr></table></figure><p>当jnz指令第一次执行时，转移一定会发生。那么，处理器就可以预测，下一次它还会转移到标号lops处，而不是顺序往下执行。事实上，这个预测通常是很准的。</p><p>在处理器内部，有一个小容量的高速缓存器，叫分支目标缓存器（Branch Target Buffer，BTB）。当处理器执行了一条分支语句后，它会在BTB中记录当前指令的地址、分支目标的地址，以及本次分支预测的结果。下一次，在那条转移指令实际执行前，处理器会查找BTB，看有没有最近的转移记录。如果能找到对应的条目，则推测执行和上一次相同的分支，把该分支的指令送入流水线。</p><p>当该指令实际执行时，如果预测是失败的，那么，清空流水线，同时刷新BTB中的记录。这个代价较大。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 操作系统编程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 从实模式到保护模式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>1.IA-32架构的基本执行环境</title>
       <link href="/posts/9ec7c8da/"/>
       <url>/posts/9ec7c8da/</url>
       
@@ -20,11 +45,7 @@
       
         <tags>
             
-            <tag> 汇编 </tag>
-            
-            <tag> 操作系统 </tag>
-            
-            <tag> X86体系 </tag>
+            <tag> 从实模式到保护模式 </tag>
             
         </tags>
       
