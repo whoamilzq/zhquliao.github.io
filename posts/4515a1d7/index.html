@@ -56,31 +56,38 @@
   };
 </script>
 
-  <meta name="description" content="不积跬步，无以至千里，不积小流，无以成江海。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="清风恋语的个人博客">
-<meta property="og:url" content="https://3601blog.cn/index.html">
+  <meta name="description" content="32位处理器的寻址方式在16位处理器上，指令中的操作数可以是8位或者16位的寄存器、指向8位或者16位实际操作数的16位内存地址，以及8位或16位的立即数。 如果指令中包含了内存地址操作数，那么，它必然是一个16位的段内偏移地址，称为有效地址。通过有效地址，可以间接取得8位或者16位的实际操作数。指定有效地址可以使用基址寄存器BX、BP，变址（索引）寄存器SI和DI，同时还可以加上一个8位或16位">
+<meta name="keywords" content="从实模式到保护模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3.32位模式的指令系统">
+<meta property="og:url" content="https://3601blog.cn/posts/4515a1d7/index.html">
 <meta property="og:site_name" content="清风恋语的个人博客">
-<meta property="og:description" content="不积跬步，无以至千里，不积小流，无以成江海。">
+<meta property="og:description" content="32位处理器的寻址方式在16位处理器上，指令中的操作数可以是8位或者16位的寄存器、指向8位或者16位实际操作数的16位内存地址，以及8位或16位的立即数。 如果指令中包含了内存地址操作数，那么，它必然是一个16位的段内偏移地址，称为有效地址。通过有效地址，可以间接取得8位或者16位的实际操作数。指定有效地址可以使用基址寄存器BX、BP，变址（索引）寄存器SI和DI，同时还可以加上一个8位或16位">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/H5ccf6fe7cb524065b7602090e9348ccbi.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/Hd73c9654fc7c4a46be95c2dd6a843201H.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/Hefb24305a3354f2ba452c5ff58df7870h.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/H0565a523c6754ad290b2fd8760c85456f.jpg">
+<meta property="og:updated_time" content="2019-09-13T14:06:02.642Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="清风恋语的个人博客">
-<meta name="twitter:description" content="不积跬步，无以至千里，不积小流，无以成江海。">
-  <link rel="canonical" href="https://3601blog.cn/">
+<meta name="twitter:title" content="3.32位模式的指令系统">
+<meta name="twitter:description" content="32位处理器的寻址方式在16位处理器上，指令中的操作数可以是8位或者16位的寄存器、指向8位或者16位实际操作数的16位内存地址，以及8位或16位的立即数。 如果指令中包含了内存地址操作数，那么，它必然是一个16位的段内偏移地址，称为有效地址。通过有效地址，可以间接取得8位或者16位的实际操作数。指定有效地址可以使用基址寄存器BX、BP，变址（索引）寄存器SI和DI，同时还可以加上一个8位或16位">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/H5ccf6fe7cb524065b7602090e9348ccbi.jpg">
+  <link rel="canonical" href="https://3601blog.cn/posts/4515a1d7/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>清风恋语的个人博客</title>
+  <title>3.32位模式的指令系统 | 清风恋语的个人博客</title>
   
 
 
@@ -259,12 +266,13 @@
 
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="https://3601blog.cn/posts/4515a1d7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -277,9 +285,8 @@
       <meta itemprop="name" content="清风恋语的个人博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/posts/4515a1d7/" class="post-title-link" itemprop="url">3.32位模式的指令系统</a>
+        <h1 class="post-title" itemprop="name headline">3.32位模式的指令系统
+
           
         </h1>
 
@@ -347,7 +354,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="32位处理器的寻址方式"><a href="#32位处理器的寻址方式" class="headerlink" title="32位处理器的寻址方式"></a>32位处理器的寻址方式</h2><p>在16位处理器上，指令中的操作数可以是8位或者16位的寄存器、指向8位或者16位实际操作数的16位内存地址，以及8位或16位的立即数。</p>
+        <h2 id="32位处理器的寻址方式"><a href="#32位处理器的寻址方式" class="headerlink" title="32位处理器的寻址方式"></a>32位处理器的寻址方式</h2><p>在16位处理器上，指令中的操作数可以是8位或者16位的寄存器、指向8位或者16位实际操作数的16位内存地址，以及8位或16位的立即数。</p>
 <p>如果指令中包含了内存地址操作数，那么，它必然是一个16位的段内偏移地址，称为有效地址。通过有效地址，可以间接取得8位或者16位的实际操作数。指定有效地址可以使用基址寄存器BX、BP，变址（索引）寄存器SI和DI，同时还可以加上一个8位或16位的偏移量。比如： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax,[bx]</span><br><span class="line">mov ax,[bx+di]</span><br><span class="line">mov al,[bx+si+0x02]</span><br></pre></td></tr></table></figure>
 
@@ -466,8 +473,6 @@
 
 <p>在16位模式下，先将SP的内容减去2，然后直接压入段寄存器的内容；在32位模式下，要先将段寄存器的内容用零扩展到32位，即高16位为全零。然后，将ESP的内容减去4，再压入扩展后的32位值。</p>
 
-        
-      
     </div>
 
     
@@ -476,549 +481,84 @@
     
     <div>
     
+      
+
+
+<div>
+    
+        <div style="text-align:center;color: #aaa;font-size:14px;">-------------本文结束啦<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
     </div>
 
     
     
     
-      <footer class="post-footer">
-          <div class="post-eof"></div>
         
-      </footer>
+      
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="清风恋语 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="清风恋语 支付宝">
+        <p>支付宝</p>
+      </div>
+
   </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://3601blog.cn/posts/75d3effb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="清风恋语">
-      <meta itemprop="description" content="不积跬步，无以至千里，不积小流，无以成江海。">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="清风恋语的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/posts/75d3effb/" class="post-title-link" itemprop="url">2.现代处理器的结构和特点</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-07 22:25:07" itemprop="dateCreated datePublished" datetime="2019-09-07T22:25:07+08:00">2019-09-07</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-08 20:27:03" itemprop="dateModified" datetime="2019-09-08T20:27:03+08:00">2019-09-08</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统编程/" itemprop="url" rel="index"><span itemprop="name">操作系统编程</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>4.4k</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>7 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</div>
 
       
-          <h2 id="流水线"><a href="#流水线" class="headerlink" title="流水线"></a>流水线</h2><p>处理器的每一次更新换代，都会增加若干新特性，这是很自然的。同时我们也会发现，老软件在新的处理器上跑得更快。这里面的原因很简单，处理器的设计者总是在想尽办法加快指令的执行。</p>
-          <!--noindex-->
+
+      <footer class="post-footer">
           
-            <div class="post-button text-center">
-              <a class="btn" href="/posts/75d3effb/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/从实模式到保护模式/" rel="tag"><i class="fa fa-tag"></i> 从实模式到保护模式</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/posts/75d3effb/" rel="next" title="2.现代处理器的结构和特点">
+                  <i class="fa fa-chevron-left"></i> 2.现代处理器的结构和特点
+                </a>
+              
             </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
-    
-    
-    
-    <div>
-    
-    </div>
+            <span class="post-nav-divider"></span>
 
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://3601blog.cn/posts/9ec7c8da/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="清风恋语">
-      <meta itemprop="description" content="不积跬步，无以至千里，不积小流，无以成江海。">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="清风恋语的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/posts/9ec7c8da/" class="post-title-link" itemprop="url">1.IA-32架构的基本执行环境</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
+            <div class="post-nav-prev post-nav-item">
               
-                
-              
-
-              <time title="创建时间：2019-09-06 22:18:54" itemprop="dateCreated datePublished" datetime="2019-09-06T22:18:54+08:00">2019-09-06</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-08 20:26:58" itemprop="dateModified" datetime="2019-09-08T20:26:58+08:00">2019-09-08</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统编程/" itemprop="url" rel="index"><span itemprop="name">操作系统编程</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>4.1k</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>7 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="寄存器的扩展"><a href="#寄存器的扩展" class="headerlink" title="寄存器的扩展"></a>寄存器的扩展</h2><p>在 16 位处理器内，有 8 个通用寄存器 AX、BX、CX、DX、SI、DI、BP 和 SP，其中，前 4 个还可以拆分成两个独立的 8 位寄存器来用，即 AH、AL、BH、BL、CH、CL、DH 和 DL。32 位处理器在 16 位处理器的基础上，扩展了这 8 个通用寄存器的长度，组成EAX、EBX、ECX、EDX、ESI、EDI、EBP 这 8 个 32 位存储器。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/posts/9ec7c8da/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
             </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-    
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://3601blog.cn/posts/dd5c0739/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="清风恋语">
-      <meta itemprop="description" content="不积跬步，无以至千里，不积小流，无以成江海。">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="清风恋语的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/posts/dd5c0739/" class="post-title-link" itemprop="url">树和二叉树</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-04 15:51:42" itemprop="dateCreated datePublished" datetime="2019-09-04T15:51:42+08:00">2019-09-04</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-06 21:01:45" itemprop="dateModified" datetime="2019-09-06T21:01:45+08:00">2019-09-06</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>1.6k</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>3 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>树型结构是一种重要的非线性数据结构。其中以树和二叉树最为重要，直观来看，树是以分支关系定义的层次结构。树结构在客观世界中广泛存在，如人类社会的族谱和各种社会组织机构都可用树来形象表示。树在计算机领域中也得到广泛应用，如在编译程序中，可以用树来表示源程序的语法结构。又如在数据库系统中，树形结构也是信息的重要组织形式之一。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/posts/dd5c0739/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-    
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
   </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://3601blog.cn/posts/4a17b156/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="清风恋语">
-      <meta itemprop="description" content="不积跬步，无以至千里，不积小流，无以成江海。">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="清风恋语的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/posts/4a17b156/" class="post-title-link" itemprop="url">Hello World</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-02 09:10:52" itemprop="dateCreated datePublished" datetime="2019-09-02T09:10:52+08:00">2019-09-02</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-04 20:36:45" itemprop="dateModified" datetime="2019-09-04T20:36:45+08:00">2019-09-04</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其他/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>421</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>1 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/posts/4a17b156/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-    
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-  </div>
-
-  
 
 
           </div>
@@ -1037,6 +577,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -1049,6 +594,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#32位处理器的寻址方式"><span class="nav-number">1.</span> <span class="nav-text">32位处理器的寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作数大小的指令前缀"><span class="nav-number">2.</span> <span class="nav-text">操作数大小的指令前缀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一般指令的扩展"><span class="nav-number">3.</span> <span class="nav-text">一般指令的扩展</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
