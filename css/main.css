@@ -351,6 +351,7 @@ body {
 }
 .container {
   position: relative;
+  background: #beeb9f;
 }
 .header-inner {
   margin: 0 auto;
@@ -1095,8 +1096,8 @@ pre .javascript .function {
   position: relative;
 }
 .headband {
-  background: #222;
-  height: 3px;
+  background: 0 0;
+  height: 10px;
 }
 .site-meta {
   margin: 0;
@@ -1108,7 +1109,7 @@ pre .javascript .function {
   }
 }
 .brand {
-  background: #222;
+  background: #fc6423;
   border-bottom: none;
   color: #fff;
   display: inline-block;
@@ -1806,7 +1807,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff240e;
+  background: #9eeb1c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2453,7 +2454,7 @@ ul.breadcrumb li + li:last-child {
 }
 .header-inner {
   background: #fff;
-  border-radius: initial;
+  border-radius: 10px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
   overflow: hidden;
   padding: 0;
@@ -2488,7 +2489,7 @@ ul.breadcrumb li + li:last-child {
 }
 .content-wrap {
   background: #fff;
-  border-radius: initial;
+  border-radius: 10px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
   box-sizing: border-box;
   float: right;
@@ -2548,7 +2549,7 @@ ul.breadcrumb li + li:last-child {
   position: relative;
 }
 .site-meta {
-  background: #222;
+  background: #fc6423;
   color: #fff;
   padding: 20px 0;
 }
@@ -2702,7 +2703,7 @@ ul.breadcrumb li + li:last-child {
 }
 .sidebar-inner {
   background: #fff;
-  border-radius: initial;
+  border-radius: 10px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   box-sizing: border-box;
   color: #555;
@@ -2826,18 +2827,18 @@ ul.breadcrumb li + li:last-child {
 }
 .post-block {
   background: #fff;
-  border-radius: initial;
+  border-radius: 10px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
   padding: 40px;
 }
 #posts > article + article .post-block {
-  border-radius: initial;
+  border-radius: 10px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   margin-top: 12px;
 }
 .comments {
   background: #fff;
-  border-radius: initial;
+  border-radius: 10px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   margin: auto;
   margin-top: 12px;
@@ -2863,7 +2864,7 @@ ul.breadcrumb li + li:last-child {
 }
 .pagination {
   background: #fff;
-  border-radius: initial;
+  border-radius: 10px;
   border-top: initial;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   margin: 12px 0 0;
@@ -2917,7 +2918,7 @@ ul.breadcrumb li + li:last-child {
     margin-top: 20px;
   }
   .post-block {
-    border-radius: initial;
+    border-radius: 10px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
     padding: 20px;
   }
@@ -2943,7 +2944,7 @@ ul.breadcrumb li + li:last-child {
     margin: 12px 0;
   }
   .post-block {
-    border-radius: initial;
+    border-radius: 10px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
     min-height: auto;
     padding: 12px;
